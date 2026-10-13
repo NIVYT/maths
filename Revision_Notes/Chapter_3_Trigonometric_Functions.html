@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3: Trigonometric Functions — Class 11 Maths</title>
+  <link rel="stylesheet" href="common_style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+  <style>
+    .concept-box { background:#1e40af; border-radius:10px; padding:1.25rem 1.5rem; margin-bottom:1.25rem; color:#bfdbfe; }
+    .concept-box h4 { color:#ffffff; margin-bottom:0.5rem; font-size:1rem; }
+    .concept-box p, .concept-box ul, .concept-box ol { color:#bfdbfe; font-size:0.95rem; margin-bottom:0.4rem; }
+    .concept-box ul, .concept-box ol { padding-left:1.25rem; }
+    .concept-box strong { color:#ffffff; }
+    .example-box { background:#ffffff; border-radius:10px; margin-bottom:1.25rem; overflow:hidden; }
+    .example-header { background:#7c3aed; padding:0.75rem 1.25rem; display:flex; justify-content:space-between; align-items:center; }
+    .example-header strong { color:#ffffff; font-size:0.95rem; }
+    .example-level { font-size:0.75rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:4px; color:#ffffff; }
+    .level-easy { background:#059669; }
+    .level-med { background:#d97706; }
+    .level-hard { background:#dc2626; }
+    .example-q { background:#f5f3ff; padding:1rem 1.25rem; color:#3b0764; font-size:0.95rem; }
+    .example-sol { background:#ede9fe; padding:1rem 1.25rem; }
+    .example-sol p { color:#4c1d95; font-size:0.92rem; margin-bottom:0.5rem; }
+    .step { padding:0.4rem 0 0.4rem 0.75rem; border-left:3px solid #7c3aed; margin-bottom:0.5rem; color:#3b0764; font-size:0.92rem; }
+    .ncert-box { background:#0f172a; border-radius:10px; padding:1.25rem 1.5rem; margin-bottom:1.25rem; }
+    .ncert-box h4 { color:#7dd3fc; margin-bottom:0.75rem; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.04em; }
+    .ncert-q { background:#1e293b; border-radius:6px; padding:0.85rem 1rem; margin-bottom:0.75rem; color:#e2e8f0; font-size:0.92rem; }
+    .ncert-ans { background:#0c4a6e; border-radius:6px; padding:0.6rem 1rem; margin-top:0.4rem; color:#bae6fd; font-size:0.9rem; }
+    .definition { background:#059669; border-radius:8px; padding:1rem 1.25rem; margin-bottom:1rem; }
+    .definition strong { color:#ffffff; display:block; margin-bottom:0.25rem; }
+    .definition p { color:#d1fae5; font-size:0.95rem; }
+    .types-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.25rem; }
+    .type-card { background:#0284c7; border-radius:8px; padding:0.85rem 1rem; }
+    .type-card h5 { color:#ffffff; font-size:0.9rem; margin-bottom:0.25rem; }
+    .type-card p { color:#bae6fd; font-size:0.83rem; }
+    .toc { background:#1e293b; border-radius:10px; padding:1.25rem; margin-bottom:2rem; }
+    .toc h3 { color:#7dd3fc; font-size:1rem; margin-bottom:0.75rem; }
+    .toc ol { padding-left:1.25rem; color:#94a3b8; font-size:0.9rem; line-height:2; }
+    .toc a { color:#7dd3fc; text-decoration:none; }
+    .toc a:hover { color:#ffffff; }
+    .table-container { overflow-x:auto; margin-bottom:1.25rem; }
+    table.data-table { width:100%; border-collapse:collapse; background:#ffffff; border-radius:8px; overflow:hidden; }
+    table.data-table th { background:#1e293b; color:#ffffff; padding:0.75rem 1rem; text-align:left; font-size:0.9rem; }
+    table.data-table td { padding:0.75rem 1rem; border-bottom:1px solid #e2e8f0; font-size:0.9rem; color:#1e293b; }
+    table.data-table tr:nth-child(even) td { background:#f8fafc; }
+    
+  </style>
+</head>
+<body>
+<nav class="top-navbar">
+  <a href="index.html" class="nav-brand"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg> Class 11 Maths</a>
+  <div class="nav-actions">
+    <button class="btn" onclick="toggleAllSolutions()"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Toggle Solutions</button>
+    <button class="btn btn-primary" onclick="window.print()"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg> Print</button>
+  </div>
+</nav>
+<div class="container">
+
+<div class="header-card">
+  <span class="badge">NCERT Chapter 3</span>
+  <h1>Trigonometric Functions</h1>
+  <p>The biggest and highest-weightage chapter: master radians, the unit circle, ASTC quadrant rules, and all 25+ essential identities.</p>
+  <div class="stats-row">
+    <span><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> ~55 min read</span>
+    <span><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg> 8–10 marks in exam</span>
+    <span><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> <a href="../kemh103.pdf">kemh103.pdf</a></span>
+  </div>
+</div>
+
+<div class="toc">
+  <h3><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> What you will learn in this chapter</h3>
+  <ol>
+    <li><a href="#s1">Angles & Measurements — Degrees, Radians & $l = r\theta$</a></li>
+    <li><a href="#s2">Unit Circle & The ASTC Quadrant Rule</a></li>
+    <li><a href="#s3">Domain, Range & Values at Quadrantal Angles</a></li>
+    <li><a href="#s4">Sum & Difference Identities (Compound Angles)</a></li>
+    <li><a href="#s5">Multiple & Submultiple Angles ($2x, 3x, x/2$)</a></li>
+    <li><a href="#s6">Product-to-Sum & C-D Transformation Formulas</a></li>
+    <li><a href="#s7">Worked Examples — Easy to Hard</a></li>
+    <li><a href="#s8">NCERT Key Exercise Questions Solved</a></li>
+    <li><a href="#s9">Common Exam Traps & Pitfalls</a></li>
+    <li><a href="#s10">Quick Self-Check Quiz</a></li>
+  </ol>
+</div>
+
+<!-- SECTION 1 -->
+<h2 class="section-title" id="s1"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> 1. Angles & Measurement: Degrees vs Radians</h2>
+
+<div class="definition">
+  <strong>Definition of Radian Measure</strong>
+  <p>One radian ($1\text{ rad}$) is the angle subtended at the center of a circle of radius $r$ by an arc of length equal to $r$.</p>
+  <p>$$l = r \cdot \theta \quad (\text{where } \theta \text{ MUST be in radians!})$$</p>
+</div>
+
+<div class="concept-box">
+  <h4>The Bridge Between Degrees and Radians</h4>
+  <p>A full circle of $360^\circ$ corresponds to a circumference of $2\pi r$. Hence:</p>
+  <p>$$2\pi \text{ radians} = 360^\circ \iff \pi \text{ radians} = 180^\circ$$</p>
+  <ul>
+    <li><strong>To convert Degrees to Radians:</strong> Multiply by $\frac{\pi}{180^\circ}$.</li>
+    <li><strong>To convert Radians to Degrees:</strong> Multiply by $\frac{180^\circ}{\pi}$.</li>
+    <li>$1^\circ = 60'\text{ (minutes)}$, $1' = 60''\text{ (seconds)}$.</li>
+    <li>$1 \text{ radian} = \frac{180^\circ}{\pi} \approx 57^\circ 16' 22''$.</li>
+  </ul>
+</div>
+
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Degree</th>
+        <th>$0^\circ$</th>
+        <th>$30^\circ$</th>
+        <th>$45^\circ$</th>
+        <th>$60^\circ$</th>
+        <th>$90^\circ$</th>
+        <th>$180^\circ$</th>
+        <th>$270^\circ$</th>
+        <th>$360^\circ$</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Radian</strong></td>
+        <td>$0$</td>
+        <td>$\frac{\pi}{6}$</td>
+        <td>$\frac{\pi}{4}$</td>
+        <td>$\frac{\pi}{3}$</td>
+        <td>$\frac{\pi}{2}$</td>
+        <td>$\pi$</td>
+        <td>$\frac{3\pi}{2}$</td>
+        <td>$2\pi$</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 2 -->
+<h2 class="section-title" id="s2"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> 2. Unit Circle & The ASTC Quadrant Rule</h2>
+
+<div class="concept-box">
+  <h4>Trig on the Unit Circle</h4>
+  <p>Consider a circle of radius $r = 1$ centered at origin $(0,0)$. For any angle $x$, the terminal ray hits the circle at point $P(a, b)$:</p>
+  <p>$$\cos x = a \quad (\text{the x-coordinate}), \qquad \sin x = b \quad (\text{the y-coordinate})$$</p>
+  <p>Since $x^2 + y^2 = 1$ on the circle, we immediately get the fundamental identity: $\cos^2 x + \sin^2 x = 1$.</p>
+</div>
+
+<div class="types-grid">
+  <div class="type-card">
+    <h5>Quadrant I ($0$ to $\pi/2$) — "ALL"</h5>
+    <p>Both $x > 0$ and $y > 0$.<br><strong>ALL</strong> trigonometric functions are <strong>POSITIVE</strong> ($+$, $+$, $+$, $+$, $+$, $+$).</p>
+  </div>
+  <div class="type-card">
+    <h5>Quadrant II ($\pi/2$ to $\pi$) — "SILVER / STUDENTS"</h5>
+    <p>$x < 0$, $y > 0$.<br>Only <strong>SINE</strong> and <strong>COSECANT</strong> are <strong>POSITIVE</strong>. All others are negative.</p>
+  </div>
+  <div class="type-card">
+    <h5>Quadrant III ($\pi$ to $3\pi/2$) — "TEA / TAKE"</h5>
+    <p>$x < 0$, $y < 0$.<br>Only <strong>TANGENT</strong> and <strong>COTANGENT</strong> are <strong>POSITIVE</strong>. All others are negative.</p>
+  </div>
+  <div class="type-card">
+    <h5>Quadrant IV ($3\pi/2$ to $2\pi$) — "CUPS / CALCULUS"</h5>
+    <p>$x > 0$, $y < 0$.<br>Only <strong>COSINE</strong> and <strong>SECANT</strong> are <strong>POSITIVE</strong>. All others are negative.</p>
+  </div>
+</div>
+
+<div class="concept-box">
+  <h4>Mnemonic: "All Silver Tea Cups" or "Add Sugar To Coffee"</h4>
+  <p>$$Q_1: \mathbf{A}\text{ll} \quad \longrightarrow \quad Q_2: \mathbf{S}\text{in} \quad \longrightarrow \quad Q_3: \mathbf{T}\text{an} \quad \longrightarrow \quad Q_4: \mathbf{C}\text{os}$$</p>
+  <p><strong>Negative Angles Rule:</strong></p>
+  <p>$$\cos(-x) = \cos x, \quad \sec(-x) = \sec x \quad (\text{Even functions — eat the minus!})$$</p>
+  <p>$$\sin(-x) = -\sin x, \quad \tan(-x) = -\tan x, \quad \cot(-x) = -\cot x, \quad \csc(-x) = -\csc x \quad (\text{Odd functions})$$</p>
+</div>
+
+<!-- SECTION 3 -->
+<h2 class="section-title" id="s3"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> 3. Domain, Range & Allied Angles</h2>
+
+<div class="table-container">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Function</th>
+        <th>Domain</th>
+        <th>Range</th>
+        <th>Period</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$\sin x$</td>
+        <td>$\mathbb{R}$</td>
+        <td>$[-1, 1]$</td>
+        <td>$2\pi$</td>
+      </tr>
+      <tr>
+        <td>$\cos x$</td>
+        <td>$\mathbb{R}$</td>
+        <td>$[-1, 1]$</td>
+        <td>$2\pi$</td>
+      </tr>
+      <tr>
+        <td>$\tan x$</td>
+        <td>$\mathbb{R} \setminus \{(2n+1)\frac{\pi}{2} : n \in \mathbb{Z}\}$</td>
+        <td>$\mathbb{R}$</td>
+        <td>$\pi$</td>
+      </tr>
+      <tr>
+        <td>$\cot x$</td>
+        <td>$\mathbb{R} \setminus \{n\pi : n \in \mathbb{Z}\}$</td>
+        <td>$\mathbb{R}$</td>
+        <td>$\pi$</td>
+      </tr>
+      <tr>
+        <td>$\sec x$</td>
+        <td>$\mathbb{R} \setminus \{(2n+1)\frac{\pi}{2} : n \in \mathbb{Z}\}$</td>
+        <td>$(-\infty, -1] \cup [1, \infty)$</td>
+        <td>$2\pi$</td>
+      </tr>
+      <tr>
+        <td>$\csc x$</td>
+        <td>$\mathbb{R} \setminus \{n\pi : n \in \mathbb{Z}\}$</td>
+        <td>$(-\infty, -1] \cup [1, \infty)$</td>
+        <td>$2\pi$</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="concept-box">
+  <h4>Golden Rule for Allied Angles: $\frac{n\pi}{2} \pm x$</h4>
+  <ul>
+    <li><strong>If $n$ is EVEN ($\pi \pm x$, $2\pi \pm x$):</strong> The ratio <strong>DOES NOT CHANGE</strong> (sin remains sin, cos remains cos).</li>
+    <li><strong>If $n$ is ODD ($\frac{\pi}{2} \pm x$, $\frac{3\pi}{2} \pm x$):</strong> The ratio <strong>CHANGES TO CO-FUNCTION</strong> ($\sin \leftrightarrow \cos$, $\tan \leftrightarrow \cot$, $\sec \leftrightarrow \csc$).</li>
+    <li><strong>Sign:</strong> Determined strictly by the quadrant of the original angle!</li>
+    <li><em>Example:</em> $\sin(\pi - x) = +\sin x$ (Q2, sine is positive). $\cos(\pi - x) = -\cos x$ (Q2, cos is negative).</li>
+    <li><em>Example:</em> $\cos\left(\frac{\pi}{2} + x\right) = -\sin x$ (Q2, cos is negative, odd multiple changes cos to sin).</li>
+  </ul>
+</div>
+
+<!-- SECTION 4 -->
+<h2 class="section-title" id="s4"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> 4. Sum & Difference of Two Angles</h2>
+
+<div class="concept-box">
+  <h4>The Master Formulas (Must Memorize!)</h4>
+  <p><strong>1. Cosine of Sum & Difference:</strong></p>
+  <p>$$\cos(x + y) = \cos x \cos y - \sin x \sin y$$</p>
+  <p>$$\cos(x - y) = \cos x \cos y + \sin x \sin y$$</p>
+  <p><strong>2. Sine of Sum & Difference:</strong></p>
+  <p>$$\sin(x + y) = \sin x \cos y + \cos x \sin y$$</p>
+  <p>$$\sin(x - y) = \sin x \cos y - \cos x \sin y$$</p>
+  <p><strong>3. Tangent of Sum & Difference:</strong></p>
+  <p>$$\tan(x + y) = \frac{\tan x + \tan y}{1 - \tan x \tan y}$$</p>
+  <p>$$\tan(x - y) = \frac{\tan x - \tan y}{1 + \tan x \tan y}$$</p>
+  <p><strong>4. Cotangent:</strong></p>
+  <p>$$\cot(x + y) = \frac{\cot x \cot y - 1}{\cot y + \cot x}, \qquad \cot(x - y) = \frac{\cot x \cot y + 1}{\cot y - \cot x}$$</p>
+</div>
+
+<!-- SECTION 5 -->
+<h2 class="section-title" id="s5"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> 5. Multiple & Submultiple Angles ($2x, 3x, x/2$)</h2>
+
+<div class="concept-box">
+  <h4>Double Angle Formulas ($2x$)</h4>
+  <p><strong>1. Cosine has 4 distinct forms:</strong></p>
+  <p>$$\cos 2x = \cos^2 x - \sin^2 x = 2\cos^2 x - 1 = 1 - 2\sin^2 x = \frac{1 - \tan^2 x}{1 + \tan^2 x}$$</p>
+  <p><strong>Power-Reduction (Lifesavers in proofs and calculus!):</strong></p>
+  <p>$$\sin^2 x = \frac{1 - \cos 2x}{2}, \qquad \cos^2 x = \frac{1 + \cos 2x}{2}$$</p>
+  <p><strong>2. Sine:</strong></p>
+  <p>$$\sin 2x = 2\sin x \cos x = \frac{2\tan x}{1 + \tan^2 x}$$</p>
+  <p><strong>3. Tangent:</strong></p>
+  <p>$$\tan 2x = \frac{2\tan x}{1 - \tan^2 x}$$</p>
+</div>
+
+<div class="concept-box">
+  <h4>Triple Angle Formulas ($3x$)</h4>
+  <p>$$\sin 3x = 3\sin x - 4\sin^3 x$$</p>
+  <p>$$\cos 3x = 4\cos^3 x - 3\cos x$$</p>
+  <p>$$\tan 3x = \frac{3\tan x - \tan^3 x}{1 - 3\tan^2 x}$$</p>
+</div>
+
+<!-- SECTION 6 -->
+<h2 class="section-title" id="s6"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> 6. Product-to-Sum & C-D Formulas</h2>
+
+<div class="types-grid">
+  <div class="type-card">
+    <h5>Product to Sum / Difference</h5>
+    <p>$$2\sin x \cos y = \sin(x + y) + \sin(x - y)$$</p>
+    <p>$$2\cos x \sin y = \sin(x + y) - \sin(x - y)$$</p>
+    <p>$$2\cos x \cos y = \cos(x + y) + \cos(x - y)$$</p>
+    <p>$$-2\sin x \sin y = \cos(x + y) - \cos(x - y)$$</p>
+  </div>
+  <div class="type-card">
+    <h5>Sum to Product (The C-D Formulas)</h5>
+    <p>$$\sin C + \sin D = 2\sin\frac{C+D}{2}\cos\frac{C-D}{2}$$</p>
+    <p>$$\sin C - \sin D = 2\cos\frac{C+D}{2}\sin\frac{C-D}{2}$$</p>
+    <p>$$\cos C + \cos D = 2\cos\frac{C+D}{2}\cos\frac{C-D}{2}$$</p>
+    <p>$$\cos C - \cos D = -2\sin\frac{C+D}{2}\sin\frac{C-D}{2} = 2\sin\frac{C+D}{2}\sin\frac{D-C}{2}$$</p>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<h2 class="section-title" id="s7"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg> 7. Worked Examples — Easy to Hard</h2>
+
+<!-- Ex 1 -->
+<div class="example-box">
+  <div class="example-header">
+    <strong>Example 1: Degree to Radian Conversion with Minutes</strong>
+    <span class="example-level level-easy">Easy</span>
+  </div>
+  <div class="example-q">
+    Convert $40^\circ 20'$ into radian measure.
+  </div>
+  <div class="example-sol">
+    <div class="step">
+      <strong>Step 1:</strong> Convert minutes into fractions of a degree:
+      $$20' = \frac{20}{60}^\circ = \frac{1}{3}^\circ$$
+      $$40^\circ 20' = 40 + \frac{1}{3} = \frac{121^\circ}{3}$$
+    </div>
+    <div class="step">
+      <strong>Step 2:</strong> Multiply by $\frac{\pi}{180^\circ}$:
+      $$\text{Radian measure} = \frac{121}{3} \times \frac{\pi}{180} = \frac{121\pi}{540} \text{ rad}$$
+    </div>
+  </div>
+</div>
+
+<!-- Ex 2 -->
+<div class="example-box">
+  <div class="example-header">
+    <strong>Example 2: Arc Length Formula $l = r\theta$</strong>
+    <span class="example-level level-easy">Easy</span>
+  </div>
+  <div class="example-q">
+    A wheel makes 360 revolutions in one minute. Through how many radians does it turn in one second?
+  </div>
+  <div class="example-sol">
+    <div class="step">
+      <strong>Step 1:</strong> Number of revolutions in 1 second:
+      $$\text{Revolutions per sec} = \frac{360}{60} = 6$$
+    </div>
+    <div class="step">
+      <strong>Step 2:</strong> In one complete revolution, angle turned is $2\pi$ radians.
+      $$\text{In 6 revolutions, angle turned} = 6 \times 2\pi = 12\pi \text{ radians}$$
+    </div>
+  </div>
+</div>
+
+<!-- Ex 3 -->
+<div class="example-box">
+  <div class="example-header">
+    <strong>Example 3: Finding All 5 Ratios from One Value & Quadrant</strong>
+    <span class="example-level level-med">Medium</span>
+  </div>
+  <div class="example-q">
+    If $\cos x = -\frac{3}{5}$ and $x$ lies in the 3rd quadrant, find the values of the other five trigonometric functions.
+  </div>
+  <div class="example-sol">
+    <div class="step">
+      <strong>Step 1: Secant</strong>
+      $$\sec x = \frac{1}{\cos x} = -\frac{5}{3}$$
+    </div>
+    <div class="step">
+      <strong>Step 2: Sine</strong>
+      $$\sin^2 x = 1 - \cos^2 x = 1 - \left(-\frac{3}{5}\right)^2 = 1 - \frac{9}{25} = \frac{16}{25}$$
+      Since $x$ is in Quadrant III, $\sin x$ is <strong>negative</strong>:
+      $$\sin x = -\sqrt{\frac{16}{25}} = -\frac{4}{5}$$
+    </div>
+    <div class="step">
+      <strong>Step 3: Cosecant, Tangent, Cotangent</strong>
+      $$\csc x = \frac{1}{\sin x} = -\frac{5}{4}$$
+      $$\tan x = \frac{\sin x}{\cos x} = \frac{-4/5}{-3/5} = +\frac{4}{3} \quad (\text{positive in Q3!})$$
+      $$\cot x = \frac{1}{\tan x} = +\frac{3}{4}$$
+    </div>
+  </div>
+</div>
+
+<!-- Ex 4 -->
+<div class="example-box">
+  <div class="example-header">
+    <strong>Example 4: Evaluating $\sin 15^\circ$ and $\tan 15^\circ$</strong>
+    <span class="example-level level-med">Medium</span>
+  </div>
+  <div class="example-q">
+    Find the exact value of $\sin 15^\circ$.
+  </div>
+  <div class="example-sol">
+    <div class="step">
+      <strong>Step 1:</strong> Write $15^\circ$ as a difference of standard angles: $45^\circ - 30^\circ$.
+      $$\sin 15^\circ = \sin(45^\circ - 30^\circ) = \sin 45^\circ \cos 30^\circ - \cos 45^\circ \sin 30^\circ$$
+    </div>
+    <div class="step">
+      <strong>Step 2:</strong> Substitute standard values:
+      $$\sin 15^\circ = \left(\frac{1}{\sqrt{2}}\right)\left(\frac{\sqrt{3}}{2}\right) - \left(\frac{1}{\sqrt{2}}\right)\left(\frac{1}{2}\right) = \frac{\sqrt{3} - 1}{2\sqrt{2}}$$
+    </div>
+  </div>
+</div>
+
+<!-- Ex 5 -->
+<div class="example-box">
+  <div class="example-header">
+    <strong>Example 5: Proving Identity Using C-D Formulas</strong>
+    <span class="example-level level-hard">Hard</span>
+  </div>
+  <div class="example-q">
+    Prove that:
+    $$\frac{\sin 5x - 2\sin 3x + \sin x}{\cos 5x - \cos x} = \tan x$$
+  </div>
+  <div class="example-sol">
+    <div class="step">
+      <strong>Step 1: Regroup numerator terms:</strong>
+      $$\text{LHS} = \frac{(\sin 5x + \sin x) - 2\sin 3x}{\cos 5x - \cos x}$$
+    </div>
+    <div class="step">
+      <strong>Step 2: Apply C-D formulas:</strong>
+      For numerator: $\sin 5x + \sin x = 2\sin\left(\frac{5x+x}{2}\right)\cos\left(\frac{5x-x}{2}\right) = 2\sin 3x \cos 2x$.
+      For denominator: $\cos 5x - \cos x = -2\sin\left(\frac{5x+x}{2}\right)\sin\left(\frac{5x-x}{2}\right) = -2\sin 3x \sin 2x$.
+    </div>
+    <div class="step">
+      <strong>Step 3: Factor out $2\sin 3x$:</strong>
+      $$\text{LHS} = \frac{2\sin 3x (\cos 2x - 1)}{-2\sin 3x \sin 2x} = \frac{\cos 2x - 1}{-\sin 2x} = \frac{1 - \cos 2x}{\sin 2x}$$
+    </div>
+    <div class="step">
+      <strong>Step 4: Use double angle identities:</strong>
+      $$1 - \cos 2x = 2\sin^2 x, \qquad \sin 2x = 2\sin x \cos x$$
+      $$\text{LHS} = \frac{2\sin^2 x}{2\sin x \cos x} = \frac{\sin x}{\cos x} = \tan x = \text{RHS}$$
+      <strong>Hence proved!</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Ex 6 -->
+<div class="example-box">
+  <div class="example-header">
+    <strong>Example 6: Finding $\tan \frac{\pi}{8}$ (Submultiple Half Angle)</strong>
+    <span class="example-level level-hard">Hard</span>
+  </div>
+  <div class="example-q">
+    Find the exact value of $\tan \frac{\pi}{8}$ ($22.5^\circ$).
+  </div>
+  <div class="example-sol">
+    <div class="step">
+      <strong>Step 1:</strong> Let $x = \frac{\pi}{8}$, then $2x = \frac{\pi}{4}$.
+      We know: $\tan 2x = \frac{2\tan x}{1 - \tan^2 x}$.
+      $$\tan \frac{\pi}{4} = 1 \implies 1 = \frac{2\tan x}{1 - \tan^2 x}$$
+    </div>
+    <div class="step">
+      <strong>Step 2:</strong> Form quadratic in $t = \tan x$:
+      $$1 - t^2 = 2t \implies t^2 + 2t - 1 = 0$$
+    </div>
+    <div class="step">
+      <strong>Step 3:</strong> Solve using quadratic formula:
+      $$t = \frac{-2 \pm \sqrt{4 - 4(1)(-1)}}{2} = \frac{-2 \pm \sqrt{8}}{2} = -1 \pm \sqrt{2}$$
+      Since $\frac{\pi}{8}$ is in Quadrant I ($22.5^\circ$), $\tan \frac{\pi}{8} > 0$.
+      $$\mathbf{\tan \frac{\pi}{8} = \sqrt{2} - 1}$$
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8 -->
+<h2 class="section-title" id="s8"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> 8. NCERT Key Exercise Questions Solved</h2>
+
+<div class="ncert-box">
+  <h4>NCERT Exercise 3.1 — Question 6</h4>
+  <div class="ncert-q">
+    <strong>Q:</strong> If in two circles, arcs of the same length subtend angles $60^\circ$ and $75^\circ$ at the centre, find the ratio of their radii.
+    <details>
+      <summary>View Full Solution</summary>
+      <div class="ncert-ans">
+        <p>Convert angles to radians: $\theta_1 = 60^\circ \times \frac{\pi}{180} = \frac{\pi}{3}$, $\theta_2 = 75^\circ \times \frac{\pi}{180} = \frac{5\pi}{12}$.</p>
+        <p>Given arc lengths are equal: $l_1 = l_2 \implies r_1 \theta_1 = r_2 \theta_2$.</p>
+        <p>$$\frac{r_1}{r_2} = \frac{\theta_2}{\theta_1} = \frac{5\pi/12}{\pi/3} = \frac{5}{12} \times \frac{3}{1} = \frac{5}{4}$$</p>
+        <p><strong>Ratio of radii $r_1 : r_2 = 5 : 4$.</strong></p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="ncert-box">
+  <h4>NCERT Exercise 3.2 — Question 7</h4>
+  <div class="ncert-q">
+    <strong>Q:</strong> Find the value of $\csc(-1410^\circ)$.
+    <details>
+      <summary>View Full Solution</summary>
+      <div class="ncert-ans">
+        <p>Using $\csc(-x) = -\csc(x)$: $\csc(-1410^\circ) = -\csc(1410^\circ)$.</p>
+        <p>Notice that $4 \times 360^\circ = 1440^\circ$.</p>
+        <p>So $1410^\circ = 4 \times 360^\circ - 30^\circ$.</p>
+        <p>Since $\csc(2n\pi - \theta) = -\csc \theta$, we have:</p>
+        <p>$$\csc(1410^\circ) = \csc(1440^\circ - 30^\circ) = -\csc 30^\circ = -2$$</p>
+        <p>$$\csc(-1410^\circ) = -(-2) = 2$$</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="ncert-box">
+  <h4>NCERT Exercise 3.3 — Question 21</h4>
+  <div class="ncert-q">
+    <strong>Q:</strong> Prove that $\frac{\cos 4x + \cos 3x + \cos 2x}{\sin 4x + \sin 3x + \sin 2x} = \cot 3x$.
+    <details>
+      <summary>View Full Solution</summary>
+      <div class="ncert-ans">
+        <p>Pair terms with symmetric angles $(4x, 2x)$ so that their average is $3x$:</p>
+        <p>Numerator: $(\cos 4x + \cos 2x) + \cos 3x = 2\cos 3x \cos x + \cos 3x = \cos 3x(2\cos x + 1)$.</p>
+        <p>Denominator: $(\sin 4x + \sin 2x) + \sin 3x = 2\sin 3x \cos x + \sin 3x = \sin 3x(2\cos x + 1)$.</p>
+        <p>Dividing numerator by denominator: $\frac{\cos 3x(2\cos x + 1)}{\sin 3x(2\cos x + 1)} = \frac{\cos 3x}{\sin 3x} = \cot 3x$.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- SECTION 9 -->
+<h2 class="section-title" id="s9"><svg class="icon-svg icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> 9. Common Exam Traps & Pitfalls</h2>
+
+<div class="trap-card">
+  <h4><svg class="icon-svg icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Trap 1: Forgetting that $\theta$ MUST be in Radians in $l = r\theta$</h4>
+  <p>If a question says radius $r = 10\text{ cm}$ and angle $\theta = 30^\circ$, NEVER calculate $l = 10 \times 30 = 300\text{ cm}$! You must convert $30^\circ$ to radians first: $\frac{\pi}{6}$, giving $l = \frac{10\pi}{6} = \frac{5\pi}{3}\text{ cm}$.</p>
+</div>
+
+<div class="trap-card">
+  <h4><svg class="icon-svg icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Trap 2: $\cos C - \cos D$ Negative Sign</h4>
+  <p>The identity has a minus sign: $\cos C - \cos D = -2\sin\frac{C+D}{2}\sin\frac{C-D}{2}$. If you write positive $2$, you lose marks! Alternatively, write $2\sin\frac{C+D}{2}\sin\frac{D-C}{2}$.</p>
+</div>
+
+<div class="trap-card">
+  <h4><svg class="icon-svg icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg> Trap 3: Parity of Cosine vs Sine</h4>
+  <p>$\cos(-x) = \cos x$ (absorbs minus), whereas $\sin(-x) = -\sin x$. Many students erroneously write $\cos(-\pi/3) = -\cos(\pi/3)$, which leads to sign errors.</p>
+</div>
+
+<!-- SECTION 10 -->
+<h2 class="section-title" id="s10"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg> 10. Quick Self-Check Quiz</h2>
+
+<div class="quiz-card">
+  <p><strong>Q1:</strong> What is the degree measure corresponding to $-\frac{2\pi}{3}$ radians?</p>
+  <details><summary>Answer</summary>
+  <div class="quiz-ans">$-\frac{2\pi}{3} \times \frac{180^\circ}{\pi} = -2 \times 60^\circ = -120^\circ$.</div></details>
+</div>
+
+<div class="quiz-card">
+  <p><strong>Q2:</strong> If $\tan x = \frac{3}{4}$ and $x$ is in the 3rd quadrant, what is the value of $\sin x$?</p>
+  <details><summary>Answer</summary>
+  <div class="quiz-ans">In Q3, sine is negative. Hypotenuse = $\sqrt{3^2 + 4^2} = 5$. Thus, $\sin x = -\frac{3}{5}$.</div></details>
+</div>
+
+<div class="quiz-card">
+  <p><strong>Q3:</strong> What is the maximum value of $f(x) = 3\sin x + 4\cos x$?</p>
+  <details><summary>Answer</summary>
+  <div class="quiz-ans">For $a\sin x + b\cos x$, maximum is $\sqrt{a^2 + b^2} = \sqrt{3^2 + 4^2} = \sqrt{25} = 5$. Minimum is $-5$.</div></details>
+</div>
+
+<div class="quiz-card">
+  <p><strong>Q4:</strong> What is $\cos 2x$ in terms of $\tan x$?</p>
+  <details><summary>Answer</summary>
+  <div class="quiz-ans">$\cos 2x = \frac{1 - \tan^2 x}{1 + \tan^2 x}$.</div></details>
+</div>
+
+<div class="quiz-card">
+  <p><strong>Q5:</strong> What is the value of $\sin 75^\circ \cos 15^\circ + \cos 75^\circ \sin 15^\circ$?</p>
+  <details><summary>Answer</summary>
+  <div class="quiz-ans">Using $\sin(A + B)$: $\sin(75^\circ + 15^\circ) = \sin 90^\circ = 1$.</div></details>
+</div>
+
+<div class="bottom-nav">
+  <a href="Chapter_2_Relations_and_Functions.html" class="btn"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Prev Chapter</a>
+  <a href="index.html" class="btn"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Hub</a>
+  <a href="Chapter_4_Complex_Numbers.html" class="btn btn-primary">Next Chapter <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+</div>
+<script>
+  let open=false;
+  function toggleAllSolutions(){open=!open;document.querySelectorAll('details').forEach(d=>d.open=open);}
+</script>
+</body></html>
