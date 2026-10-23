@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computer Exam MCQ Quiz</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      scrollbar-width: thin;
+      scrollbar-color: #3f3f46 #17171a;
+    }
+
+    /* Custom Dark Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #17171a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #2e2e34;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #3f3f46;
+    }
+
+    ::-webkit-scrollbar-button {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background-color: #17171a;
+    }
+
+    body {
+      background-color: #101012;
+      color: #e4e4e7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background-color: #161619;
+      border-bottom: 1px solid #27272a;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f4f4f5;
+      letter-spacing: 0.2px;
+    }
+
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+
+    .stat-val {
+      color: #f4f4f5;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    select, button {
+      background-color: #222226;
+      color: #e4e4e7;
+      border: 1px solid #27272a;
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    select:hover, button:hover {
+      background-color: #2c2c32;
+    }
+
+    button:disabled {
+      background-color: #1a1a1d;
+      color: #52525b;
+      cursor: not-allowed;
+    }
+
+    /* Main Container - Centered vertically and horizontally */
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background-color: #222226;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #52525b;
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+
+    /* Card */
+    .card {
+      background-color: #17171a;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: #a1a1aa;
+    }
+
+    .badge {
+      background-color: #222226;
+      border: 1px solid #27272a;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #d4d4d8;
+    }
+
+    .question-text {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #f4f4f5;
+      margin-bottom: 22px;
+    }
+
+    /* Options */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      background-color: #1f1f23;
+      border: 1px solid #27272a;
+      border-radius: 6px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #d4d4d8;
+      text-align: left;
+      width: 100%;
+    }
+
+    .option-item:hover:not(.locked) {
+      background-color: #29292e;
+    }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      background-color: #27272a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #a1a1aa;
+      flex-shrink: 0;
+    }
+
+    .opt-text {
+      flex: 1;
+    }
+
+    .opt-status {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Answered states - Plain solid colors only, zero colored borders */
+    .option-item.correct {
+      background-color: #143d23;
+      color: #86efac;
+    }
+
+    .option-item.correct .opt-letter {
+      background-color: #1a4d2e;
+      color: #86efac;
+    }
+
+    .option-item.incorrect {
+      background-color: #421719;
+      color: #fca5a5;
+    }
+
+    .option-item.incorrect .opt-letter {
+      background-color: #551d20;
+      color: #fca5a5;
+    }
+
+    .option-item.locked {
+      cursor: default;
+    }
+
+    /* Card Navigation */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid #27272a;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Question Navigator Grid */
+    .nav-grid-toggle {
+      font-size: 13px;
+      color: #a1a1aa;
+      background: none;
+      border: 1px solid #27272a;
+    }
+
+    .grid-container {
+      background-color: #17171a;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 16px;
+      display: none;
+    }
+
+    .grid-container.open {
+      display: block;
+    }
+
+    .grid-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+
+    .nav-dots {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+      gap: 6px;
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 4px;
+    }
+
+    .dot {
+      width: 100%;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #222226;
+      border: 1px solid #27272a;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #a1a1aa;
+      cursor: pointer;
+    }
+
+    .dot:hover {
+      background-color: #2c2c32;
+    }
+
+    .dot.current {
+      background-color: #3f3f46;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .dot.answered-correct {
+      background-color: #143d23;
+      color: #86efac;
+    }
+
+    .dot.answered-incorrect {
+      background-color: #421719;
+      color: #fca5a5;
+    }
+
+    /* Summary Bar */
+    .summary-card {
+      background-color: #17171a;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .summary-items {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: #a1a1aa;
+    }
+
+    .summary-val {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f4f4f5;
+    }
+
+    .summary-val.c-green {
+      color: #86efac;
+    }
+
+    .summary-val.c-red {
+      color: #fca5a5;
+    }
+
+    /* Results / Overview Screen */
+    .results-card {
+      background-color: #17171a;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .results-card.active {
+      display: flex;
+    }
+
+    .results-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #27272a;
+    }
+
+    .results-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f4f4f5;
+    }
+
+    .results-score-panel {
+      background-color: #1f1f23;
+      border: 1px solid #27272a;
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .score-block-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f4f4f5;
+      margin-bottom: 4px;
+    }
+
+    .score-block-label {
+      font-size: 12px;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Chapter breakdown section */
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #d4d4d8;
+      margin-bottom: 8px;
+    }
+
+    .chapter-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ch-row {
+      background-color: #1f1f23;
+      border: 1px solid #27272a;
+      border-radius: 6px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .ch-name {
+      color: #e4e4e7;
+    }
+
+    .ch-stat {
+      color: #a1a1aa;
+      font-weight: 600;
+    }
+
+    /* Review filter buttons */
+    .review-filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .filter-btn.active {
+      background-color: #3f3f46;
+      color: #ffffff;
+    }
+
+    /* Review questions list */
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .review-item {
+      background-color: #1f1f23;
+      border: 1px solid #27272a;
+      border-radius: 6px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .review-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #a1a1aa;
+    }
+
+    .review-q-text {
+      color: #f4f4f5;
+      line-height: 1.4;
+    }
+
+    .review-ans-row {
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 6px;
+      border-top: 1px solid #27272a;
+    }
+
+    .ans-selected {
+      color: #d4d4d8;
+    }
+
+    .ans-correct-detail {
+      color: #86efac;
+    }
+
+    .status-tag-correct {
+      color: #86efac;
+      font-weight: 600;
+    }
+
+    .status-tag-incorrect {
+      color: #fca5a5;
+      font-weight: 600;
+    }
+
+    .status-tag-skipped {
+      color: #a1a1aa;
+      font-weight: 600;
+    }
+
+    /* Results actions */
+    .results-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid #27272a;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <h1>Computer Exam MCQ Quiz</h1>
+      <div class="stats-bar">
+        <span>Question <span id="stat-current" class="stat-val">1</span> of <span id="stat-total" class="stat-val">25</span></span>
+        <span>Score: <span id="stat-score" class="stat-val">0</span> / <span id="stat-answered" class="stat-val">0</span></span>
+        <span>Accuracy: <span id="stat-accuracy" class="stat-val">0%</span></span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <select id="chapter-filter" onchange="onChapterChange()">
+        <option value="random25" selected>Random 25 Questions (Any Chapter)</option>
+        <option value="all">All Chapters (134 Questions)</option>
+        <option value="Chapter 1: Introduction to DBMS">Chapter 1: DBMS (25)</option>
+        <option value="Chapter 2: Introduction to LibreOffice Base">Chapter 2: Base (23)</option>
+        <option value="Chapter 3: Data Retrieval Using Queries">Chapter 3: Queries (29)</option>
+        <option value="Chapter 4: Working with Forms and Reports">Chapter 4: Forms & Reports (25)</option>
+        <option value="Chapter 5: Problem Solving - Flowchart & Algorithm">Chapter 5: Flowchart & Algorithm (32)</option>
+      </select>
+      <button id="btn-sound" onclick="toggleSound()">Sound: ON</button>
+      <button onclick="shuffleAndReset()">Reshuffle & Restart</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="progress-container" id="prog-wrap">
+      <div class="progress-fill" id="progress-bar"></div>
+    </div>
+
+    <!-- Active Quiz Card -->
+    <div class="card" id="quiz-card">
+      <div class="question-meta">
+        <span class="badge" id="q-chapter">Chapter</span>
+        <span id="q-number-label">Question 1 of 25</span>
+      </div>
+
+      <div class="question-text" id="q-text">Loading question...</div>
+
+      <div class="options-grid" id="options-container">
+        <!-- Rendered options -->
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-grid-toggle" onclick="toggleNavGrid()">Toggle Question List</button>
+        <div class="nav-buttons">
+          <button id="btn-view-overview" onclick="showResults()" style="display: none;">Quiz Overview</button>
+          <button id="btn-prev" onclick="prevQuestion()">Previous</button>
+          <button id="btn-next" onclick="nextQuestion()">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results / Overview Card -->
+    <div class="results-card" id="results-card">
+      <div class="results-top">
+        <div class="results-title">Quiz Overview</div>
+        <div class="badge" id="res-badge">Random 25 Batch</div>
+      </div>
+
+      <div class="results-score-panel">
+        <div>
+          <div class="score-block-num" id="res-score-num">0 / 25</div>
+          <div class="score-block-label">Final Score</div>
+        </div>
+        <div>
+          <div class="score-block-num" id="res-acc-num">0%</div>
+          <div class="score-block-label">Accuracy</div>
+        </div>
+        <div>
+          <div class="score-block-num c-green" id="res-correct-num">0</div>
+          <div class="score-block-label">Correct</div>
+        </div>
+        <div>
+          <div class="score-block-num c-red" id="res-incorrect-num">0</div>
+          <div class="score-block-label">Incorrect</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">Chapter Performance</div>
+        <div class="chapter-breakdown" id="res-chapter-list">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <div>
+        <div class="review-filter-bar">
+          <div class="section-title" style="margin-bottom: 0;">Question Review</div>
+          <div class="filter-btn-group">
+            <button class="filter-btn active" id="btn-rev-all" onclick="filterReview('all')">All</button>
+            <button class="filter-btn" id="btn-rev-wrong" onclick="filterReview('wrong')">Incorrect Only</button>
+            <button class="filter-btn" id="btn-rev-correct" onclick="filterReview('correct')">Correct Only</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-list" id="res-review-container">
+        <!-- Questions listed dynamically -->
+      </div>
+
+      <div class="results-actions">
+        <button onclick="retakeCurrentBatch()">Retake Same Batch</button>
+        <button onclick="backToQuizView()">Review in Quiz View</button>
+        <button onclick="shuffleAndReset()">Start New Batch</button>
+      </div>
+    </div>
+
+    <!-- Question Navigator Grid Drawer -->
+    <div class="grid-container" id="grid-container">
+      <div class="grid-header">
+        <span>Jump to Question</span>
+        <span id="grid-summary-text">0 / 25 Answered</span>
+      </div>
+      <div class="nav-dots" id="nav-dots">
+        <!-- Dots rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Bottom summary status -->
+    <div class="summary-card" id="summary-bar">
+      <div class="summary-items">
+        <div>Total: <span id="sum-total" class="summary-val">25</span></div>
+        <div>Answered: <span id="sum-answered" class="summary-val">0</span></div>
+        <div>Correct: <span id="sum-correct" class="summary-val c-green">0</span></div>
+        <div>Incorrect: <span id="sum-incorrect" class="summary-val c-red">0</span></div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button id="btn-open-results" onclick="showResults()" style="display: none;">View Overview</button>
+        <button onclick="resetAnswersOnly()">Clear Answers</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const MASTER_QUESTIONS = [
+  {
+    "id": 1,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Unorganized facts, figures, and raw details related to people, places, or events are called:",
+    "options": [
+      "Information",
+      "Metadata",
+      "Data",
+      "Data Model"
+    ],
+    "answer": "Data"
+  },
+  {
+    "id": 2,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "When raw data is passed through a transformation process to become structured, relevant, and meaningful, it is called:",
+    "options": [
+      "Raw Record",
+      "Information",
+      "Form",
+      "Macro"
+    ],
+    "answer": "Information"
+  },
+  {
+    "id": 3,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A collection of multiple related data items stored in a properly organized manner is defined as a:",
+    "options": [
+      "Spreadsheet",
+      "Flat File",
+      "Database",
+      "Query"
+    ],
+    "answer": "Database"
+  },
+  {
+    "id": 4,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which data model represents data as a single, two-dimensional table with no defined connections?",
+    "options": [
+      "Relational Model",
+      "Network Model",
+      "Hierarchical Model",
+      "Flat Data Model"
+    ],
+    "answer": "Flat Data Model"
+  },
+  {
+    "id": 5,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which file format is a classic everyday example of a flat data model?",
+    "options": [
+      ".sql",
+      ".csv (Comma-Separated Values)",
+      ".exe",
+      ".html"
+    ],
+    "answer": ".csv (Comma-Separated Values)"
+  },
+  {
+    "id": 6,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "What drawback occurs when the exact same data is unnecessarily repeated multiple times in a flat database?",
+    "options": [
+      "Data Integrity",
+      "Data Redundancy",
+      "Limited Modularity",
+      "Analytical Difficulty"
+    ],
+    "answer": "Data Redundancy"
+  },
+  {
+    "id": 7,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "The relational data model organizes and arranges data into structures called:",
+    "options": [
+      "Trees",
+      "Hierarchies",
+      "Tables (Relationships)",
+      "Flat files"
+    ],
+    "answer": "Tables (Relationships)"
+  },
+  {
+    "id": 8,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which English-like declarative statements are extensively used for querying complex relational databases?",
+    "options": [
+      "C++ Scripting",
+      "HTML Tags",
+      "Structured Query Language (SQL)",
+      "Python Functions"
+    ],
+    "answer": "Structured Query Language (SQL)"
+  },
+  {
+    "id": 9,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Enforcing validation rules to ensure data remains consistently accurate across operations highlights the need for:",
+    "options": [
+      "Concurrent Access",
+      "Data Integrity and Consistency",
+      "Reporting dashboards",
+      "High redundancy"
+    ],
+    "answer": "Data Integrity and Consistency"
+  },
+  {
+    "id": 10,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which feature allows a database to let multiple stakeholders access and modify data simultaneously without conflicts?",
+    "options": [
+      "Access Control",
+      "Data Redundancy",
+      "Concurrent Access",
+      "System Restore"
+    ],
+    "answer": "Concurrent Access"
+  },
+  {
+    "id": 11,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A software application that serves as an efficient bridge between database users and the actual stored database is a:",
+    "options": [
+      "Operating System",
+      "Database Management System (DBMS)",
+      "Spreadsheet Matrix",
+      "Flat Interface"
+    ],
+    "answer": "Database Management System (DBMS)"
+  },
+  {
+    "id": 12,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which of the following is a well-known example of an Open Source DBMS?",
+    "options": [
+      "Oracle",
+      "Microsoft Access",
+      "IBM DB2",
+      "LibreOffice Base / MySQL"
+    ],
+    "answer": "LibreOffice Base / MySQL"
+  },
+  {
+    "id": 13,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "In standard database terminology, a table column is referred to as a ________ and a row is referred to as a ________.",
+    "options": [
+      "Record, Field",
+      "Field, Record",
+      "Entity, Attribute",
+      "Macro, Form"
+    ],
+    "answer": "Field, Record"
+  },
+  {
+    "id": 14,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A specific real-world object or instance about which data is structurally collected (like a person or student) is an:",
+    "options": [
+      "Field",
+      "Attribute",
+      "Entity",
+      "Component"
+    ],
+    "answer": "Entity"
+  },
+  {
+    "id": 15,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which basic DBMS object provides a customized Graphical User Interface (GUI) to add, edit, or delete records easily?",
+    "options": [
+      "Query",
+      "Form",
+      "Report",
+      "Table"
+    ],
+    "answer": "Form"
+  },
+  {
+    "id": 16,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A question formed and structurally asked within a database to filter or find target information is called a:",
+    "options": [
+      "Query",
+      "Macro",
+      "Form",
+      "Schema"
+    ],
+    "answer": "Query"
+  },
+  {
+    "id": 17,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which component presents database information in a neatly formatted, highly organized, and human-readable print format?",
+    "options": [
+      "Table Matrix",
+      "Query Filter",
+      "Report",
+      "Access Input"
+    ],
+    "answer": "Report"
+  },
+  {
+    "id": 18,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A sequence of commands that automates highly repetitive database tasks with a single click is a:",
+    "options": [
+      "Attribute",
+      "Macro",
+      "Schema",
+      "Relationship Key"
+    ],
+    "answer": "Macro"
+  },
+  {
+    "id": 19,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A field that uniquely identifies every single row in a relational table is strictly defined as a:",
+    "options": [
+      "Foreign Key",
+      "Candidate Key",
+      "Primary Key",
+      "Alternate Key"
+    ],
+    "answer": "Primary Key"
+  },
+  {
+    "id": 20,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "If a table combines more than one field together to uniquely identify a single record, this combination is a:",
+    "options": [
+      "Compound Variant",
+      "Composite Key",
+      "Secondary Link",
+      "Alternate Option"
+    ],
+    "answer": "Composite Key"
+  },
+  {
+    "id": 21,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "The key field in one table used to link and uniquely identify records in another related table is called a:",
+    "options": [
+      "Primary Key",
+      "Foreign Key",
+      "Candidate Key",
+      "Alternate Key"
+    ],
+    "answer": "Foreign Key"
+  },
+  {
+    "id": 22,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "Which of the following is an example of a DBMS?",
+    "options": [
+      "MS Word",
+      "Paint",
+      "MySQL",
+      "Calculator"
+    ],
+    "answer": "MySQL"
+  },
+  {
+    "id": 23,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "What is the main purpose of a DBMS?",
+    "options": [
+      "To create presentations",
+      "To manage and organize data efficiently",
+      "To browse the internet",
+      "To design graphics"
+    ],
+    "answer": "To manage and organize data efficiently"
+  },
+  {
+    "id": 24,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "In a student table, \"Roll Number\" is usually an example of:",
+    "options": [
+      "Foreign Key",
+      "Primary Key",
+      "Record",
+      "Query"
+    ],
+    "answer": "Primary Key"
+  },
+  {
+    "id": 25,
+    "chapter": "Chapter 1: Introduction to DBMS",
+    "question": "A row in a database table is called a:",
+    "options": [
+      "Field",
+      "Record",
+      "Query",
+      "Form"
+    ],
+    "answer": "Record"
+  },
+  {
+    "id": 26,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "What type of software application is LibreOffice Base?",
+    "options": [
+      "Word Processor",
+      "Spreadsheet Tool",
+      "Relational Database Management System",
+      "Presentation Software"
+    ],
+    "answer": "Relational Database Management System"
+  },
+  {
+    "id": 27,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "LibreOffice Base is provided as a part of which software suite?",
+    "options": [
+      "Microsoft Office",
+      "OpenOffice Suite",
+      "LibreOffice Suite",
+      "Google Workspace"
+    ],
+    "answer": "LibreOffice Suite"
+  },
+  {
+    "id": 28,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which of the following database engines is supported by LibreOffice Base?",
+    "options": [
+      "MySQL",
+      "MS Access",
+      "PostgreSQL",
+      "All of the above"
+    ],
+    "answer": "All of the above"
+  },
+  {
+    "id": 29,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "In a table representing a school 'Teacher' entity, which field is the most appropriate choice for a Primary Key?",
+    "options": [
+      "FirstName",
+      "TeacherID",
+      "SubjectTaught",
+      "Salary"
+    ],
+    "answer": "TeacherID"
+  },
+  {
+    "id": 30,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which component of LibreOffice Base is primarily used to store actual structured data?",
+    "options": [
+      "Forms",
+      "Queries",
+      "Tables",
+      "Reports"
+    ],
+    "answer": "Tables"
+  },
+  {
+    "id": 31,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which component provides a user-friendly graphical interface to easily enter, view, and edit data in tables?",
+    "options": [
+      "Queries",
+      "Forms",
+      "Reports",
+      "Relations"
+    ],
+    "answer": "Forms"
+  },
+  {
+    "id": 32,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which component is used to retrieve specific data from a database based on specific conditions or criteria?",
+    "options": [
+      "Table",
+      "Form",
+      "Query",
+      "Macro"
+    ],
+    "answer": "Query"
+  },
+  {
+    "id": 33,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which component of LibreOffice Base is used to present data in a professionally formatted, printable layout?",
+    "options": [
+      "Document",
+      "Form",
+      "Query",
+      "Report"
+    ],
+    "answer": "Report"
+  },
+  {
+    "id": 34,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "What extension is used to save a LibreOffice Base database file?",
+    "options": [
+      ".odb",
+      ".odt",
+      ".ods",
+      ".odp"
+    ],
+    "answer": ".odb"
+  },
+  {
+    "id": 35,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which view allows full customization and manual control over creating fields, data types, and properties for a table?",
+    "options": [
+      "Wizard View",
+      "Design View",
+      "Datasheet View",
+      "Layout View"
+    ],
+    "answer": "Design View"
+  },
+  {
+    "id": 36,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "When creating a table in Design View, which of the following columns is NOT part of the field definition table grid?",
+    "options": [
+      "Field Name",
+      "Field Type",
+      "Description",
+      "Field Formula"
+    ],
+    "answer": "Field Formula"
+  },
+  {
+    "id": 37,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which property can be enabled to automatically generate sequential numeric values (e.g., 1, 2, 3...) for a Primary Key field?",
+    "options": [
+      "Default Value",
+      "Format Example",
+      "Auto Value",
+      "Entry Required"
+    ],
+    "answer": "Auto Value"
+  },
+  {
+    "id": 38,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which field property allows you to pre-define a standard value that automatically appears in the field for every new record?",
+    "options": [
+      "Auto Value",
+      "Default Value",
+      "Length",
+      "Format"
+    ],
+    "answer": "Default Value"
+  },
+  {
+    "id": 39,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "In LibreOffice Base, which key uniquely identifies each record or row in a table?",
+    "options": [
+      "Primary Key",
+      "Foreign Key",
+      "Alternate Key",
+      "Composite Key"
+    ],
+    "answer": "Primary Key"
+  },
+  {
+    "id": 40,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which data type would be best suited for storing a person's first name?",
+    "options": [
+      "Integer [INTEGER]",
+      "Text [VARCHAR]",
+      "Date [DATE]",
+      "Boolean [BOOLEAN]"
+    ],
+    "answer": "Text [VARCHAR]"
+  },
+  {
+    "id": 41,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which data type should be selected to store values that can only be True or False (Yes or No)?",
+    "options": [
+      "Numeric",
+      "Boolean [BOOLEAN]",
+      "Text",
+      "Memo"
+    ],
+    "answer": "Boolean [BOOLEAN]"
+  },
+  {
+    "id": 42,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which field property restricts the maximum number of characters that a user can type into a VARCHAR field?",
+    "options": [
+      "Size/Length",
+      "Default Value",
+      "Format Example",
+      "Decimal Places"
+    ],
+    "answer": "Size/Length"
+  },
+  {
+    "id": 43,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "To establish a link or relationship between two tables, the primary key of the parent table is added to the child table as a:",
+    "options": [
+      "Primary Key",
+      "Candidate Key",
+      "Foreign Key",
+      "Unique Key"
+    ],
+    "answer": "Foreign Key"
+  },
+  {
+    "id": 44,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which tool or feature provides step-by-step guidance using pre-defined sample tables and fields to make table creation easier for beginners?",
+    "options": [
+      "Table Wizard",
+      "Table Design View",
+      "SQL Query Builder",
+      "Form Design View"
+    ],
+    "answer": "Table Wizard"
+  },
+  {
+    "id": 45,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "The lower section of the Table Design View window displays which of the following?",
+    "options": [
+      "Table Data Rows",
+      "Field Properties",
+      "Relationship Diagrams",
+      "SQL Commands"
+    ],
+    "answer": "Field Properties"
+  },
+  {
+    "id": 46,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which view is used to view, add, or edit the actual data records inside an already created table?",
+    "options": [
+      "Design View",
+      "Relationship View",
+      "Datasheet View / Data View",
+      "Structure View"
+    ],
+    "answer": "Datasheet View / Data View"
+  },
+  {
+    "id": 47,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which of the following database tools is open source and entirely free to use?",
+    "options": [
+      "Microsoft Access",
+      "Oracle Database Enterprise",
+      "LibreOffice Base",
+      "IBM DB2"
+    ],
+    "answer": "LibreOffice Base"
+  },
+  {
+    "id": 48,
+    "chapter": "Chapter 2: Introduction to LibreOffice Base",
+    "question": "Which icon/symbol is typically shown next to a field name in Table Design View to indicate that it is the primary key?",
+    "options": [
+      "A star symbol",
+      "A small key icon",
+      "A green checkmark",
+      "A padlock icon"
+    ],
+    "answer": "A small key icon"
+  },
+  {
+    "id": 49,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which free and open-source relational database management system (RDBMS) provides a graphical interface to create databases as discussed in the text?",
+    "options": [
+      "MySQL",
+      "LibreOffice Base",
+      "Microsoft Access",
+      "Oracle Database"
+    ],
+    "answer": "LibreOffice Base"
+  },
+  {
+    "id": 50,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "In LibreOffice Base, data is stored structurally in which of the following forms?",
+    "options": [
+      "Hierarchical form",
+      "Tabular form",
+      "Network form",
+      "Unstructured text files"
+    ],
+    "answer": "Tabular form"
+  },
+  {
+    "id": 51,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What is the primary language medium through which interactions and operational commands are passed to the database?",
+    "options": [
+      "Machine Language",
+      "High-Level Spreadsheet Language",
+      "Query Language",
+      "Markup Language"
+    ],
+    "answer": "Query Language"
+  },
+  {
+    "id": 52,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which of the following describes the core definition of a database query?",
+    "options": [
+      "A temporary backup file created automatically by the database management system",
+      "A request made to a database to retrieve, modify, or manage data",
+      "A specific validation rule applied strictly to primary keys",
+      "The internal layout configuration schema of physical storage media"
+    ],
+    "answer": "A request made to a database to retrieve, modify, or manage data"
+  },
+  {
+    "id": 53,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What does the abbreviation SQL stand for in database management applications?",
+    "options": [
+      "System Query Logic",
+      "Structured Query Language",
+      "Standard Sequential Linkage",
+      "Schema Query Layout"
+    ],
+    "answer": "Structured Query Language"
+  },
+  {
+    "id": 54,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which of the following commands is categorized exclusively as a data retrieval operation in SQL?",
+    "options": [
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "SELECT"
+    ],
+    "answer": "SELECT"
+  },
+  {
+    "id": 55,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What will the specific query command 'SELECT * FROM STUDENT;' do when executed?",
+    "options": [
+      "Create a brand-new table named STUDENT with default configuration attributes",
+      "Delete all existing data from the STUDENT table permanently",
+      "Retrieve and display all columns and rows of data from the STUDENT table",
+      "Filter only those records that contain missing primary keys"
+    ],
+    "answer": "Retrieve and display all columns and rows of data from the STUDENT table"
+  },
+  {
+    "id": 56,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Examine the statement: 'INSERT INTO SUBJECT (SubjectID, SubjectName, ClassID) VALUES (1, \"Science\", 9);'. What is its specific function?",
+    "options": [
+      "It alters an existing row where SubjectID is equal to 1",
+      "It inserts a completely new record into the Subject table",
+      "It filters the table to show records matching Class 9",
+      "It drops the table column named SubjectName"
+    ],
+    "answer": "It inserts a completely new record into the Subject table"
+  },
+  {
+    "id": 57,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which SQL statement keyword must be used if a user wants to modify or change existing records within a table?",
+    "options": [
+      "CHANGE",
+      "MODIFY",
+      "ALTER",
+      "UPDATE"
+    ],
+    "answer": "UPDATE"
+  },
+  {
+    "id": 58,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What happens if a user executes the command 'DELETE FROM SUBJECT;' without adding a WHERE clause condition?",
+    "options": [
+      "Only the first row of the Subject table is deleted",
+      "All rows of the Subject table are deleted from the system",
+      "An immediate compilation error is thrown by the RDBMS engine",
+      "The physical schema definition of the table is dropped from the database"
+    ],
+    "answer": "All rows of the Subject table are deleted from the system"
+  },
+  {
+    "id": 59,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "In what structural format is the final output of a successfully processed query returned to a LibreOffice Base user?",
+    "options": [
+      "A flat text document",
+      "An unformatted chart graphic",
+      "A table structured into rows and columns",
+      "A nested hierarchical tree configuration"
+    ],
+    "answer": "A table structured into rows and columns"
+  },
+  {
+    "id": 60,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "When a database file is opened inside LibreOffice Base, on which panel interface element can a user locate the icon to work with queries?",
+    "options": [
+      "Top menu bar drop-down system",
+      "Left side pane options layout",
+      "Bottom status display ribbon",
+      "Right side contextual properties drawer"
+    ],
+    "answer": "Left side pane options layout"
+  },
+  {
+    "id": 61,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "According to the textbook, which of the following is identified as the easiest method for a beginner to query a database?",
+    "options": [
+      "Query Design View",
+      "SQL View Direct Entry",
+      "The Query Wizard",
+      "CommandLine Script Tool"
+    ],
+    "answer": "The Query Wizard"
+  },
+  {
+    "id": 62,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "How many distinctive conceptual setup steps are listed within the left pane framework of the LibreOffice Base Query Wizard dialog box?",
+    "options": [
+      "Four steps",
+      "Six steps",
+      "Eight steps",
+      "Ten steps"
+    ],
+    "answer": "Eight steps"
+  },
+  {
+    "id": 63,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Out of all the configuration milestones in the Query Wizard, which step is strictly mandatory or compulsory?",
+    "options": [
+      "Step 1: Field selection",
+      "Step 2: Sorting order",
+      "Step 3: Search conditions",
+      "Step 7: Aliases"
+    ],
+    "answer": "Step 1: Field selection"
+  },
+  {
+    "id": 64,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Up to how many individual database fields can a user select to structure advanced sorting hierarchies in Step 2 of the Query Wizard?",
+    "options": [
+      "Two fields",
+      "Three fields",
+      "Four fields",
+      "Unlimited fields"
+    ],
+    "answer": "Four fields"
+  },
+  {
+    "id": 65,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which wildcard character placeholder is explicitly used in LibreOffice Base to substitute for a single individual character?",
+    "options": [
+      "Asterisk (*)",
+      "Question Mark (?)",
+      "Ampersand (&)",
+      "Dollar Sign ($)"
+    ],
+    "answer": "Question Mark (?)"
+  },
+  {
+    "id": 66,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What three crucial parameters must be configured by a user when setting up custom filter rules in Step 3 (Search Conditions) of the Wizard?",
+    "options": [
+      "Name, Type, Length",
+      "Fields, Condition, Value",
+      "Alias, Sort, Visible",
+      "Primary Key, Foreign Key, Check Constraint"
+    ],
+    "answer": "Fields, Condition, Value"
+  },
+  {
+    "id": 67,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Under what circumstance will the Query Wizard automatically skip steps involving numerical calculations or summarization options?",
+    "options": [
+      "If the database file contains more than five relational entities",
+      "If the selected tables contain absolutely no numeric fields",
+      "If the primary key is established on an auto-incrementing integer attribute",
+      "If the design environment runs purely on an open-source framework"
+    ],
+    "answer": "If the selected tables contain absolutely no numeric fields"
+  },
+  {
+    "id": 68,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What is the core purpose of introducing an 'Alias' for a field name during Step 7 of the Query Wizard?",
+    "options": [
+      "To establish an underlying secondary encrypted security identifier code",
+      "To change the permanent field name saved inside the primary database schema table",
+      "To display the column field headers in a more human-readable or user-friendly form",
+      "To link matching fields between different entity relationship diagrams"
+    ],
+    "answer": "To display the column field headers in a more human-readable or user-friendly form"
+  },
+  {
+    "id": 69,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What primary operational advantage does Query Design View provide over the basic Query Wizard?",
+    "options": [
+      "It uses less memory",
+      "It offers advanced control and customization options for complex queries",
+      "It completely eliminates the requirement for structural logic validation rules",
+      "It automatically translates relational tables into hierarchical flat files"
+    ],
+    "answer": "It offers advanced control and customization options for complex queries"
+  },
+  {
+    "id": 70,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which grid element inside the Design View interface controls whether a column is hidden or displayed within the processed outputs?",
+    "options": [
+      "Alias row",
+      "Function row",
+      "Visible checkbox row",
+      "Or criteria layout row"
+    ],
+    "answer": "Visible checkbox row"
+  },
+  {
+    "id": 71,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "When typing structural text string criteria within the Design View criterion cell, what delimiters must encapsulate the target text value?",
+    "options": [
+      "Curly brackets { }",
+      "Hash marks # #",
+      "Quotation marks ' '",
+      "Percent signs % %"
+    ],
+    "answer": "Quotation marks ' '"
+  },
+  {
+    "id": 72,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What will LibreOffice Base do automatically if a user forgets to type the required string delimiters around a text criterion?",
+    "options": [
+      "Terminate the active software instance immediately and lose changes",
+      "Trigger an uncompiled syntax warning error message block",
+      "Apply the appropriate quotation delimiters on its own layout grid automatically",
+      "Convert the text field character set into an integer value dynamically"
+    ],
+    "answer": "Apply the appropriate quotation delimiters on its own layout grid automatically"
+  },
+  {
+    "id": 73,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "How must explicit date literal constants be formatted when setting up a criterion filter in the Design View grid?",
+    "options": [
+      "Encapsulated inside parentheses marks like (01/01/2001)",
+      "Surrounded by specific hash character markers like #01/01/2001#",
+      "Separated using forward-facing arrow indicators like ->01/01/2001<-",
+      "Set within strict math bracket parameters like [01/01/2001]"
+    ],
+    "answer": "Surrounded by specific hash character markers like #01/01/2001#"
+  },
+  {
+    "id": 74,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "Which logical operator should a teacher combine inside a criteria cell to isolate records falling inclusively between two dates?",
+    "options": [
+      "OR",
+      "NOT",
+      "AND",
+      "EXCEPT"
+    ],
+    "answer": "AND"
+  },
+  {
+    "id": 75,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What specific operational keyword does Base offer to specify range boundaries without writing lengthy logical operators?",
+    "options": [
+      "WITHIN",
+      "BETWEEN",
+      "RANGING",
+      "INSIDE"
+    ],
+    "answer": "BETWEEN"
+  },
+  {
+    "id": 76,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "What is the correct definition of a 'wildcard character' used within database query context criteria?",
+    "options": [
+      "A key token constraint used to encrypt database structural tables",
+      "A symbol that represents any character or structural combination of characters",
+      "An index reference tag assigned exclusively to primary field properties",
+      "A system command that clears out invalid records from a workspace"
+    ],
+    "answer": "A symbol that represents any character or structural combination of characters"
+  },
+  {
+    "id": 77,
+    "chapter": "Chapter 3: Data Retrieval Using Queries",
+    "question": "If a query criterion is configured as LIKE 'K*', what kind of values will the processed output record list return?",
+    "options": [
+      "Words that have exactly two characters total and end with K",
+      "Words whose first letter is K, followed by any group or combination of characters",
+      "Records that contain the character K located anywhere inside the data string",
+      "Data items that omit the letter K from their structural sequence entirely"
+    ],
+    "answer": "Words whose first letter is K, followed by any group or combination of characters"
+  },
+  {
+    "id": 78,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which element acts as a user-friendly window into a database to view, enter, edit, and delete data?",
+    "options": [
+      "Table",
+      "Query",
+      "Form",
+      "Report"
+    ],
+    "answer": "Form"
+  },
+  {
+    "id": 79,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Forms act as the __________ for data entry and editing in a database.",
+    "options": [
+      "Back-end",
+      "Front-end",
+      "Database engine",
+      "Data model"
+    ],
+    "answer": "Front-end"
+  },
+  {
+    "id": 80,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "How many total steps are involved in the Form Wizard in LibreOffice Base?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "10"
+    ],
+    "answer": "8"
+  },
+  {
+    "id": 81,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which button in the Form Wizard is used to add ALL available fields to the form at once?",
+    "options": [
+      ">",
+      ">>",
+      "<",
+      "<<"
+    ],
+    "answer": ">>"
+  },
+  {
+    "id": 82,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which form layout arranges fields in a row with labels as column headings, resembling a spreadsheet?",
+    "options": [
+      "Columnar",
+      "Tabular",
+      "Justified",
+      "3D Look"
+    ],
+    "answer": "Tabular"
+  },
+  {
+    "id": 83,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "What is the primary purpose of Step 6 (\"Set data entry\") in the Form Wizard?",
+    "options": [
+      "To apply background colors",
+      "To define user permissions for viewing, adding, modifying, and deleting records",
+      "To set primary key rules",
+      "To rename form controls"
+    ],
+    "answer": "To define user permissions for viewing, adding, modifying, and deleting records"
+  },
+  {
+    "id": 84,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which option in the Form Wizard creates a form exclusively for adding new records without showing existing data?",
+    "options": [
+      "\"The form is to display all data\"",
+      "\"Modify the form\"",
+      "\"The form is to be used for entering new data only\"",
+      "\"Work with the form\""
+    ],
+    "answer": "\"The form is to be used for entering new data only\""
+  },
+  {
+    "id": 85,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "If you select \"Modify the form\" in the final step of the Form Wizard, the form opens in:",
+    "options": [
+      "Form View",
+      "Datasheet View",
+      "Design View",
+      "Report View"
+    ],
+    "answer": "Design View"
+  },
+  {
+    "id": 86,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "To open an existing form in Design View, right-click the form name in the Database Window and select:",
+    "options": [
+      "Open",
+      "Edit",
+      "Properties",
+      "Format"
+    ],
+    "answer": "Edit"
+  },
+  {
+    "id": 87,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "A control in Form Design View typically consists of which two components?",
+    "options": [
+      "Header and Footer",
+      "Label and Textbox",
+      "Table and Query",
+      "Primary Key and Foreign Key"
+    ],
+    "answer": "Label and Textbox"
+  },
+  {
+    "id": 88,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "To change the solid background color of a form, you right-click blank space in Form Design View and open:",
+    "options": [
+      "Form Properties",
+      "Page Style",
+      "Background Wizard",
+      "Palette Editor"
+    ],
+    "answer": "Page Style"
+  },
+  {
+    "id": 89,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "To use an image as a form background, what setting should be selected in the \"As\" dropdown menu under the Background tab?",
+    "options": [
+      "Color",
+      "Graphic",
+      "Picture",
+      "Wallpaper"
+    ],
+    "answer": "Graphic"
+  },
+  {
+    "id": 90,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Where is the navigation bar located when viewing a form in Form View?",
+    "options": [
+      "At the top menu bar",
+      "On the left panel",
+      "At the bottom of the screen",
+      "On the right sidebar"
+    ],
+    "answer": "At the bottom of the screen"
+  },
+  {
+    "id": 91,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which button on the Form navigation bar opens a blank record for entering new data?",
+    "options": [
+      "First Record",
+      "Add Entry",
+      "New Record",
+      "Insert Field"
+    ],
+    "answer": "New Record"
+  },
+  {
+    "id": 92,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which tool on the navigation bar allows users to locate specific entries using a keyword search?",
+    "options": [
+      "Filter Record",
+      "Find Record",
+      "Search Wizard",
+      "Query Finder"
+    ],
+    "answer": "Find Record"
+  },
+  {
+    "id": 93,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "What is a Database Report primarily designed for?",
+    "options": [
+      "Entering daily transactional data",
+      "Formatting and presenting retrieved information, often for printing/hard copy",
+      "Modifying table structure and data types",
+      "Designing user navigation forms"
+    ],
+    "answer": "Formatting and presenting retrieved information, often for printing/hard copy"
+  },
+  {
+    "id": 94,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Reports in LibreOffice Base can be created using:",
+    "options": [
+      "Tables only",
+      "table, a query, or a combination of both",
+      "Queries only",
+      "Forms only"
+    ],
+    "answer": "table, a query, or a combination of both"
+  },
+  {
+    "id": 95,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "How many main steps are involved in the Report Wizard?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "10"
+    ],
+    "answer": "6"
+  },
+  {
+    "id": 96,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Which button in the Report Wizard is used to remove a single selected field from the report list?",
+    "options": [
+      ">",
+      ">>",
+      "<",
+      "<<"
+    ],
+    "answer": "<"
+  },
+  {
+    "id": 97,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "What does \"Grouping\" in a report accomplish?",
+    "options": [
+      "It deletes duplicate records",
+      "It collects rows with identical values in a specific field together under a header",
+      "It sorts data alphabetically",
+      "It merges multiple tables into one single field"
+    ],
+    "answer": "It collects rows with identical values in a specific field together under a header"
+  },
+  {
+    "id": 98,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Step 4 of the Report Wizard controls:",
+    "options": [
+      "Field selection",
+      "Sort options",
+      "Database connection",
+      "Header styles"
+    ],
+    "answer": "Sort options"
+  },
+  {
+    "id": 99,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "In which step of the Report Wizard can you choose the page layout orientation (Landscape or Portrait)?",
+    "options": [
+      "Step 3",
+      "Step 4",
+      "Step 5 (Choose layout)",
+      "Step 6"
+    ],
+    "answer": "Step 5 (Choose layout)"
+  },
+  {
+    "id": 100,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "What type of report does NOT update its displayed content when the underlying table data changes?",
+    "options": [
+      "Dynamic report",
+      "Static report",
+      "Programmatic report",
+      "Interactive report"
+    ],
+    "answer": "Static report"
+  },
+  {
+    "id": 101,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "What type of report automatically updates its displayed content when underlying data is modified?",
+    "options": [
+      "Static report",
+      "Dynamic report",
+      "Formatted report",
+      "Fixed report"
+    ],
+    "answer": "Dynamic report"
+  },
+  {
+    "id": 102,
+    "chapter": "Chapter 4: Working with Forms and Reports",
+    "question": "Where do created Form and Report objects appear in the LibreOffice Base interface?",
+    "options": [
+      "In the top main menu bar",
+      "In the left pane of the Database Window",
+      "In the status bar at the bottom",
+      "In a separate external pop-up window"
+    ],
+    "answer": "In the left pane of the Database Window"
+  },
+  {
+    "id": 103,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is problem solving?",
+    "options": [
+      "A random method of finding an answer",
+      "A step-wise solution of a problem",
+      "A programming language",
+      "A type of computer hardware"
+    ],
+    "answer": "A step-wise solution of a problem"
+  },
+  {
+    "id": 104,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which of the following is a broader step in problem solving?",
+    "options": [
+      "Defining the problem with all details",
+      "Drawing only pictures",
+      "Installing software",
+      "Formatting a disk"
+    ],
+    "answer": "Defining the problem with all details"
+  },
+  {
+    "id": 105,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which processing element means performing steps one by one?",
+    "options": [
+      "Decision making",
+      "Repetition",
+      "Sequence",
+      "Connector"
+    ],
+    "answer": "Sequence"
+  },
+  {
+    "id": 106,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which processing element is used to choose between alternatives?",
+    "options": [
+      "Sequence",
+      "Decision making",
+      "Output",
+      "Connector"
+    ],
+    "answer": "Decision making"
+  },
+  {
+    "id": 107,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which processing element means performing a set of steps again and again?",
+    "options": [
+      "Repetition/Looping",
+      "Sequence",
+      "Input",
+      "Start/End"
+    ],
+    "answer": "Repetition/Looping"
+  },
+  {
+    "id": 108,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is a flowchart?",
+    "options": [
+      "A textual programming language",
+      "A pictorial representation of a problem solution",
+      "A database table",
+      "A computer network"
+    ],
+    "answer": "A pictorial representation of a problem solution"
+  },
+  {
+    "id": 109,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which symbol represents the Start and End of a flowchart?",
+    "options": [
+      "Rectangle",
+      "Diamond",
+      "Oval",
+      "Circle"
+    ],
+    "answer": "Oval"
+  },
+  {
+    "id": 110,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is the main purpose of arrows in a flowchart?",
+    "options": [
+      "To store data",
+      "To connect symbols and show the direction of flow",
+      "To perform calculations",
+      "To represent decisions"
+    ],
+    "answer": "To connect symbols and show the direction of flow"
+  },
+  {
+    "id": 111,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which symbol is used for Input and Output?",
+    "options": [
+      "Oval",
+      "Rectangle",
+      "Diamond",
+      "Parallelogram"
+    ],
+    "answer": "Parallelogram"
+  },
+  {
+    "id": 112,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which symbol represents a process in a flowchart?",
+    "options": [
+      "Rectangle",
+      "Circle",
+      "Oval",
+      "Diamond"
+    ],
+    "answer": "Rectangle"
+  },
+  {
+    "id": 113,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which symbol is used for decision making?",
+    "options": [
+      "Parallelogram",
+      "Diamond",
+      "Rectangle",
+      "Oval"
+    ],
+    "answer": "Diamond"
+  },
+  {
+    "id": 114,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which symbol is used as a connector in a flowchart?",
+    "options": [
+      "Small circle with a capital letter",
+      "Rectangle with a number",
+      "Diamond with a letter",
+      "Oval with an arrow"
+    ],
+    "answer": "Small circle with a capital letter"
+  },
+  {
+    "id": 115,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Why are connectors useful in a large flowchart?",
+    "options": [
+      "They perform calculations",
+      "They connect different parts of a flowchart",
+      "They replace all arrows",
+      "They show input values"
+    ],
+    "answer": "They connect different parts of a flowchart"
+  },
+  {
+    "id": 116,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which operation would normally be placed in a process box?",
+    "options": [
+      "Receiving input",
+      "Arithmetic computation",
+      "Showing Start",
+      "Showing End"
+    ],
+    "answer": "Arithmetic computation"
+  },
+  {
+    "id": 117,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "In the example of adding two numbers, which variables are accepted as input?",
+    "options": [
+      "A and B",
+      "P and R",
+      "N1 and N2",
+      "Sum and Count"
+    ],
+    "answer": "N1 and N2"
+  },
+  {
+    "id": 118,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "In the algorithm for finding the area of a rectangle, how is Area computed?",
+    "options": [
+      "Length + Breadth",
+      "Length × Breadth",
+      "Length − Breadth",
+      "Length ÷ Breadth"
+    ],
+    "answer": "Length × Breadth"
+  },
+  {
+    "id": 119,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is the formula for simple interest given in the chapter?",
+    "options": [
+      "I = P + R + N",
+      "I = (P × R × N) / 100",
+      "I = P × N / R",
+      "I = P − R − N"
+    ],
+    "answer": "I = (P × R × N) / 100"
+  },
+  {
+    "id": 120,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What condition is used in the flowchart to find the maximum of two numbers?",
+    "options": [
+      "N1 = N2",
+      "N1 < N2",
+      "N1 > N2",
+      "N1 + N2"
+    ],
+    "answer": "N1 > N2"
+  },
+  {
+    "id": 121,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "If the condition N1 > N2 is false when finding the maximum, which number is printed?",
+    "options": [
+      "N1",
+      "N2",
+      "N1 + N2",
+      "Neither"
+    ],
+    "answer": "N2"
+  },
+  {
+    "id": 122,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which operator gives the remainder after division?",
+    "options": [
+      "+",
+      "/",
+      "%",
+      "*"
+    ],
+    "answer": "%"
+  },
+  {
+    "id": 123,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "If Max % 2 = 0, the maximum number is considered:",
+    "options": [
+      "Odd",
+      "Even",
+      "Negative",
+      "Prime"
+    ],
+    "answer": "Even"
+  },
+  {
+    "id": 124,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is a nested condition?",
+    "options": [
+      "A condition inside another condition",
+      "Two programs running together",
+      "A process inside an input box",
+      "A connector inside a circle"
+    ],
+    "answer": "A condition inside another condition"
+  },
+  {
+    "id": 125,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "To find the minimum of three numbers, which variables are accepted as input in the chapter's example?",
+    "options": [
+      "N1 and N2",
+      "N1, N2 and N3",
+      "Min and Max",
+      "Sum, Count and Even"
+    ],
+    "answer": "N1, N2 and N3"
+  },
+  {
+    "id": 126,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "In the same example, what is the initial value of Even?",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "100"
+    ],
+    "answer": "2"
+  },
+  {
+    "id": 127,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "How much is Even increased after each even number is added to Sum?",
+    "options": [
+      "1",
+      "2",
+      "10",
+      "100"
+    ],
+    "answer": "2"
+  },
+  {
+    "id": 128,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is the role of Count in the first-100-even-numbers example?",
+    "options": [
+      "To store the sum",
+      "To store the next even number",
+      "To keep track of when the repetition should finish",
+      "To store the radius"
+    ],
+    "answer": "To keep track of when the repetition should finish"
+  },
+  {
+    "id": 129,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is an algorithm?",
+    "options": [
+      "A pictorial diagram only",
+      "A stepwise solution of a problem in logical order",
+      "A flowchart symbol",
+      "A computer device"
+    ],
+    "answer": "A stepwise solution of a problem in logical order"
+  },
+  {
+    "id": 130,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which notation is commonly used in an algorithm to represent operations or steps?",
+    "options": [
+      "Pseudo codes/instructions",
+      "Flowchart symbols only",
+      "Machine language only",
+      "HTML tags"
+    ],
+    "answer": "Pseudo codes/instructions"
+  },
+  {
+    "id": 131,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "What is the first step of the chapter's algorithm for finding the square of a number?",
+    "options": [
+      "STOP",
+      "Input N",
+      "START",
+      "Print Square"
+    ],
+    "answer": "START"
+  },
+  {
+    "id": 132,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Why is writing an algorithm before developing a computer program useful?",
+    "options": [
+      "It removes the need for testing",
+      "It provides clarity and correctness of the program",
+      "It replaces all programming languages",
+      "It makes flowcharts unnecessary"
+    ],
+    "answer": "It provides clarity and correctness of the program"
+  },
+  {
+    "id": 133,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which statement correctly compares flowcharts and algorithms?",
+    "options": [
+      "Both use only pictures",
+      "Flowcharts provide visual representation, while algorithms use pseudo codes/instructions",
+      "Algorithms show all paths visually, while flowcharts hide them",
+      "Flowcharts are only for programmers"
+    ],
+    "answer": "Flowcharts provide visual representation, while algorithms use pseudo codes/instructions"
+  },
+  {
+    "id": 134,
+    "chapter": "Chapter 5: Problem Solving - Flowchart & Algorithm",
+    "question": "Which of the following is not an advantage of a flowchart?",
+    "options": [
+      "Better communication",
+      "Efficient coding",
+      "Systematic testing",
+      "Improper documentation"
+    ],
+    "answer": "Improper documentation"
+  }
+];
+
+    let activeQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = {}; // index -> { selectedOption, isCorrect }
+    let activeReviewFilter = "all";
+
+    // Fisher-Yates Shuffle
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function initQuiz(mode = "random25") {
+      let pool = MASTER_QUESTIONS;
+
+      if (mode === "random25") {
+        // Pick 25 random questions from any chapter
+        const shuffledAll = shuffleArray(MASTER_QUESTIONS);
+        pool = shuffledAll.slice(0, 25);
+      } else if (mode !== "all") {
+        pool = MASTER_QUESTIONS.filter(q => q.chapter === mode);
+      }
+
+      // Shuffle order of questions in pool
+      const shuffledQuestions = shuffleArray(pool);
+
+      // Shuffle options for each individual question
+      activeQuestions = shuffledQuestions.map(q => {
+        return {
+          id: q.id,
+          chapter: q.chapter,
+          question: q.question,
+          answer: q.answer,
+          options: shuffleArray(q.options)
+        };
+      });
+
+      currentIndex = 0;
+      userAnswers = {};
+      activeReviewFilter = "all";
+
+      // Show quiz card, hide results card
+      document.getElementById("quiz-card").style.display = "block";
+      document.getElementById("prog-wrap").style.display = "block";
+      document.getElementById("summary-bar").style.display = "flex";
+      document.getElementById("results-card").classList.remove("active");
+
+      renderAll();
+    }
+
+    function onChapterChange() {
+      const mode = document.getElementById("chapter-filter").value;
+      initQuiz(mode);
+    }
+
+    function shuffleAndReset() {
+      const mode = document.getElementById("chapter-filter").value;
+      initQuiz(mode);
+    }
+
+    function resetAnswersOnly() {
+      userAnswers = {};
+      renderAll();
+    }
+
+    function retakeCurrentBatch() {
+      userAnswers = {};
+      currentIndex = 0;
+      document.getElementById("quiz-card").style.display = "block";
+      document.getElementById("prog-wrap").style.display = "block";
+      document.getElementById("summary-bar").style.display = "flex";
+      document.getElementById("results-card").classList.remove("active");
+      renderAll();
+    }
+
+    function renderAll() {
+      renderQuestion();
+      renderStats();
+      renderGrid();
+    }
+
+    function renderQuestion() {
+      if (activeQuestions.length === 0) return;
+
+      const q = activeQuestions[currentIndex];
+      const qNum = currentIndex + 1;
+      const total = activeQuestions.length;
+
+      document.getElementById("q-chapter").textContent = q.chapter;
+      document.getElementById("q-number-label").textContent = "Question " + qNum + " of " + total;
+      document.getElementById("q-text").textContent = q.question;
+
+      const optionsContainer = document.getElementById("options-container");
+      optionsContainer.innerHTML = "";
+
+      const letters = ["A", "B", "C", "D"];
+      const userState = userAnswers[currentIndex];
+      const isLocked = !!userState;
+
+      q.options.forEach((optText, optIndex) => {
+        const btn = document.createElement("button");
+        btn.className = "option-item";
+        if (isLocked) btn.classList.add("locked");
+
+        let statusText = "";
+
+        if (isLocked) {
+          if (optText === q.answer) {
+            btn.classList.add("correct");
+            statusText = "[Correct]";
+          } else if (userState.selectedOption === optText) {
+            btn.classList.add("incorrect");
+            statusText = "[Incorrect]";
+          }
+        }
+
+        btn.innerHTML = `
+          <div class="opt-letter">${letters[optIndex]}</div>
+          <div class="opt-text">${escapeHtml(optText)}</div>
+          ${statusText ? `<div class="opt-status">${statusText}</div>` : ""}
+        `;
+
+        if (!isLocked) {
+          btn.onclick = () => selectOption(optText);
+        }
+
+        optionsContainer.appendChild(btn);
+      });
+
+      // Buttons Prev/Next
+      document.getElementById("btn-prev").disabled = (currentIndex === 0);
+      document.getElementById("btn-next").disabled = (currentIndex === total - 1);
+
+      // Show Overview button if any answered or all answered
+      const answeredCount = Object.keys(userAnswers).length;
+      const showOverview = (answeredCount > 0);
+      document.getElementById("btn-view-overview").style.display = showOverview ? "inline-block" : "none";
+      document.getElementById("btn-open-results").style.display = showOverview ? "inline-block" : "none";
+
+      // Progress bar
+      const progressPercent = ((currentIndex + 1) / total) * 100;
+      document.getElementById("progress-bar").style.width = progressPercent + "%";
+    }
+
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById("btn-sound").textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
+    }
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playCheerSound() {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+
+      // 1. Triumphant Fanfare Arpeggio Chime (C5, E5, G5, C6)
+      const notes = [
+        { freq: 523.25, time: 0.00, dur: 0.30, gain: 0.22 },
+        { freq: 659.25, time: 0.09, dur: 0.30, gain: 0.22 },
+        { freq: 783.99, time: 0.18, dur: 0.40, gain: 0.28 },
+        { freq: 1046.50, time: 0.30, dur: 0.80, gain: 0.32 }
+      ];
+
+      notes.forEach(n => {
+        const osc = ctx.createOscillator();
+        const oscGain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(n.freq, now + n.time);
+
+        const harm = ctx.createOscillator();
+        const harmGain = ctx.createGain();
+        harm.type = "triangle";
+        harm.frequency.setValueAtTime(n.freq * 2, now + n.time);
+
+        const t0 = now + n.time;
+        oscGain.gain.setValueAtTime(0.0001, t0);
+        oscGain.gain.exponentialRampToValueAtTime(n.gain, t0 + 0.02);
+        oscGain.gain.exponentialRampToValueAtTime(0.0001, t0 + n.dur);
+
+        harmGain.gain.setValueAtTime(0.0001, t0);
+        harmGain.gain.exponentialRampToValueAtTime(n.gain * 0.3, t0 + 0.02);
+        harmGain.gain.exponentialRampToValueAtTime(0.0001, t0 + n.dur * 0.6);
+
+        osc.connect(oscGain);
+        harm.connect(harmGain);
+        oscGain.connect(ctx.destination);
+        harmGain.connect(ctx.destination);
+
+        osc.start(t0);
+        harm.start(t0);
+        osc.stop(t0 + n.dur);
+        harm.stop(t0 + n.dur);
+      });
+
+      // 2. Crowd Cheer and Applause Texture
+      const bufferLen = Math.floor(ctx.sampleRate * 1.1);
+      const buffer = ctx.createBuffer(1, bufferLen, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+
+      for (let i = 0; i < bufferLen; i++) {
+        const t = i / ctx.sampleRate;
+        let env = 0;
+        if (t < 0.2) {
+          env = (t / 0.2) * 0.75;
+        } else if (t < 0.6) {
+          env = 0.75 - (t - 0.2) * 0.25;
+        } else {
+          env = 0.65 * (1 - (t - 0.6) / 0.5);
+        }
+        const clapBurst = (Math.random() < 0.12) ? (Math.random() * 1.8) : 0.35;
+        data[i] = (Math.random() * 2 - 1) * env * (0.3 + 0.7 * clapBurst);
+      }
+
+      const noiseSource = ctx.createBufferSource();
+      noiseSource.buffer = buffer;
+
+      const bandpass = ctx.createBiquadFilter();
+      bandpass.type = "bandpass";
+      bandpass.frequency.setValueAtTime(1350, now);
+      bandpass.Q.setValueAtTime(1.6, now);
+
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.20, now);
+
+      noiseSource.connect(bandpass);
+      bandpass.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+
+      noiseSource.start(now);
+      noiseSource.stop(now + 1.1);
+    }
+
+    function playWrongSound() {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+
+      // Soft downward low-tone thud (gentle error tone)
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(380, now);
+
+      osc1.type = "sawtooth";
+      osc1.frequency.setValueAtTime(155, now);
+      osc1.frequency.exponentialRampToValueAtTime(80, now + 0.32);
+
+      osc2.type = "triangle";
+      osc2.frequency.setValueAtTime(115, now);
+      osc2.frequency.exponentialRampToValueAtTime(65, now + 0.32);
+
+      gainNode.gain.setValueAtTime(0.0001, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.32);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.32);
+      osc2.stop(now + 0.32);
+    }
+
+    function selectOption(selectedOpt) {
+      if (userAnswers[currentIndex]) return; // already answered
+
+      const q = activeQuestions[currentIndex];
+      const isCorrect = (selectedOpt === q.answer);
+
+      userAnswers[currentIndex] = {
+        selectedOption: selectedOpt,
+        isCorrect: isCorrect
+      };
+
+      if (isCorrect) {
+        playCheerSound();
+      } else {
+        playWrongSound();
+      }
+
+      renderAll();
+
+      // Check if all questions in active batch are answered
+      const answeredCount = Object.keys(userAnswers).length;
+      if (answeredCount === activeQuestions.length) {
+        // Auto-navigate to results page after brief moment to digest answer
+        setTimeout(() => {
+          showResults();
+        }, 700);
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderAll();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIndex < activeQuestions.length - 1) {
+        currentIndex++;
+        renderAll();
+      }
+    }
+
+    function jumpToQuestion(idx) {
+      if (idx >= 0 && idx < activeQuestions.length) {
+        currentIndex = idx;
+        backToQuizView();
+        renderAll();
+      }
+    }
+
+    function toggleNavGrid() {
+      const grid = document.getElementById("grid-container");
+      grid.classList.toggle("open");
+    }
+
+    function renderStats() {
+      const total = activeQuestions.length;
+      const answeredKeys = Object.keys(userAnswers);
+      const answeredCount = answeredKeys.length;
+      let correctCount = 0;
+
+      answeredKeys.forEach(k => {
+        if (userAnswers[k].isCorrect) correctCount++;
+      });
+
+      const incorrectCount = answeredCount - correctCount;
+      const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+
+      document.getElementById("stat-current").textContent = currentIndex + 1;
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-score").textContent = correctCount;
+      document.getElementById("stat-answered").textContent = answeredCount;
+      document.getElementById("stat-accuracy").textContent = accuracy + "%";
+
+      document.getElementById("sum-total").textContent = total;
+      document.getElementById("sum-answered").textContent = answeredCount;
+      document.getElementById("sum-correct").textContent = correctCount;
+      document.getElementById("sum-incorrect").textContent = incorrectCount;
+      document.getElementById("grid-summary-text").textContent = answeredCount + " / " + total + " Answered";
+    }
+
+    function renderGrid() {
+      const dotsContainer = document.getElementById("nav-dots");
+      dotsContainer.innerHTML = "";
+
+      activeQuestions.forEach((q, idx) => {
+        const dot = document.createElement("button");
+        dot.className = "dot";
+        dot.textContent = idx + 1;
+
+        if (idx === currentIndex) {
+          dot.classList.add("current");
+        }
+
+        if (userAnswers[idx]) {
+          if (userAnswers[idx].isCorrect) {
+            dot.classList.add("answered-correct");
+          } else {
+            dot.classList.add("answered-incorrect");
+          }
+        }
+
+        dot.onclick = () => jumpToQuestion(idx);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    // --- Results & Overview Implementation ---
+    function showResults() {
+      document.getElementById("quiz-card").style.display = "none";
+      document.getElementById("prog-wrap").style.display = "none";
+      document.getElementById("summary-bar").style.display = "none";
+      document.getElementById("grid-container").classList.remove("open");
+
+      const resultsCard = document.getElementById("results-card");
+      resultsCard.classList.add("active");
+
+      const mode = document.getElementById("chapter-filter").value;
+      const total = activeQuestions.length;
+      const answeredKeys = Object.keys(userAnswers);
+      const answeredCount = answeredKeys.length;
+
+      let correctCount = 0;
+      answeredKeys.forEach(k => {
+        if (userAnswers[k].isCorrect) correctCount++;
+      });
+      const incorrectCount = answeredCount - correctCount;
+      const accuracy = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+      // Badges and counters
+      let modeText = "Random 25 Batch";
+      if (mode === "all") modeText = "All Chapters (134 Questions)";
+      else if (mode !== "random25") modeText = mode;
+
+      document.getElementById("res-badge").textContent = modeText;
+      document.getElementById("res-score-num").textContent = correctCount + " / " + total;
+      document.getElementById("res-acc-num").textContent = accuracy + "%";
+      document.getElementById("res-correct-num").textContent = correctCount;
+      document.getElementById("res-incorrect-num").textContent = incorrectCount;
+
+      // Chapter breakdown
+      renderChapterBreakdown();
+
+      // Render review list
+      renderReviewList();
+    }
+
+    function backToQuizView() {
+      document.getElementById("quiz-card").style.display = "block";
+      document.getElementById("prog-wrap").style.display = "block";
+      document.getElementById("summary-bar").style.display = "flex";
+      document.getElementById("results-card").classList.remove("active");
+      renderAll();
+    }
+
+    function renderChapterBreakdown() {
+      const chapterStats = {};
+
+      activeQuestions.forEach((q, idx) => {
+        if (!chapterStats[q.chapter]) {
+          chapterStats[q.chapter] = { total: 0, correct: 0, incorrect: 0, unattempted: 0 };
+        }
+        chapterStats[q.chapter].total++;
+        const ans = userAnswers[idx];
+        if (ans) {
+          if (ans.isCorrect) chapterStats[q.chapter].correct++;
+          else chapterStats[q.chapter].incorrect++;
+        } else {
+          chapterStats[q.chapter].unattempted++;
+        }
+      });
+
+      const container = document.getElementById("res-chapter-list");
+      container.innerHTML = "";
+
+      Object.keys(chapterStats).forEach(ch => {
+        const stats = chapterStats[ch];
+        const pct = Math.round((stats.correct / stats.total) * 100);
+        const row = document.createElement("div");
+        row.className = "ch-row";
+        row.innerHTML = `
+          <div class="ch-name">${escapeHtml(ch)}</div>
+          <div class="ch-stat">${stats.correct} / ${stats.total} (${pct}%)</div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function filterReview(type) {
+      activeReviewFilter = type;
+
+      document.getElementById("btn-rev-all").classList.toggle("active", type === "all");
+      document.getElementById("btn-rev-wrong").classList.toggle("active", type === "wrong");
+      document.getElementById("btn-rev-correct").classList.toggle("active", type === "correct");
+
+      renderReviewList();
+    }
+
+    function renderReviewList() {
+      const container = document.getElementById("res-review-container");
+      container.innerHTML = "";
+
+      activeQuestions.forEach((q, idx) => {
+        const ans = userAnswers[idx];
+        const isAnswered = !!ans;
+        const isCorrect = isAnswered && ans.isCorrect;
+
+        // Apply filter
+        if (activeReviewFilter === "wrong" && (!isAnswered || isCorrect)) return;
+        if (activeReviewFilter === "correct" && !isCorrect) return;
+
+        const item = document.createElement("div");
+        item.className = "review-item";
+
+        let statusTag = "";
+        let ansDetails = "";
+
+        if (!isAnswered) {
+          statusTag = '<span class="status-tag-skipped">[Unanswered]</span>';
+          ansDetails = `
+            <div class="ans-selected">Your Answer: Not attempted</div>
+            <div class="ans-correct-detail">Correct Answer: ${escapeHtml(q.answer)}</div>
+          `;
+        } else if (isCorrect) {
+          statusTag = '<span class="status-tag-correct">[Correct]</span>';
+          ansDetails = `
+            <div class="ans-selected">Your Answer: ${escapeHtml(ans.selectedOption)}</div>
+          `;
+        } else {
+          statusTag = '<span class="status-tag-incorrect">[Incorrect]</span>';
+          ansDetails = `
+            <div class="ans-selected">Your Answer: ${escapeHtml(ans.selectedOption)}</div>
+            <div class="ans-correct-detail">Correct Answer: ${escapeHtml(q.answer)}</div>
+          `;
+        }
+
+        item.innerHTML = `
+          <div class="review-item-header">
+            <span>Question ${idx + 1} &bull; ${escapeHtml(q.chapter)}</span>
+            ${statusTag}
+          </div>
+          <div class="review-q-text">${escapeHtml(q.question)}</div>
+          <div class="review-ans-row">
+            ${ansDetails}
+          </div>
+        `;
+
+        container.appendChild(item);
+      });
+
+      if (container.children.length === 0) {
+        const emptyDiv = document.createElement("div");
+        emptyDiv.style.padding = "16px";
+        emptyDiv.style.color = "#a1a1aa";
+        emptyDiv.style.textAlign = "center";
+        emptyDiv.textContent = "No questions found in this category.";
+        container.appendChild(emptyDiv);
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") return;
+
+      // If results card is active, ignore quiz shortcuts
+      if (document.getElementById("results-card").classList.contains("active")) return;
+
+      if (e.key === "ArrowLeft") {
+        prevQuestion();
+      } else if (e.key === "ArrowRight") {
+        nextQuestion();
+      } else if (["1", "2", "3", "4"].includes(e.key)) {
+        const optIdx = parseInt(e.key) - 1;
+        const q = activeQuestions[currentIndex];
+        if (q && q.options[optIdx] && !userAnswers[currentIndex]) {
+          selectOption(q.options[optIdx]);
+        }
+      } else if (["a", "b", "c", "d"].includes(e.key.toLowerCase())) {
+        const map = { 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
+        const optIdx = map[e.key.toLowerCase()];
+        const q = activeQuestions[currentIndex];
+        if (q && q.options[optIdx] && !userAnswers[currentIndex]) {
+          selectOption(q.options[optIdx]);
+        }
+      }
+    });
+
+    // Initialize on page load: Random 25 batch by default with shuffled questions & options
+    window.addEventListener("DOMContentLoaded", () => {
+      initQuiz("random25");
+    });
+  </script>
+</body>
+</html>
